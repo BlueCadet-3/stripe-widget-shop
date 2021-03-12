@@ -89,7 +89,7 @@ const Category = require('./models/category');
         },
     ]);
 
-    console.log(widgets)
+    console.log(widgets);
 
     process.exit();
 

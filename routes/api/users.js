@@ -8,6 +8,6 @@ router.post('/', usersCtrl.create);
 router.post('/login', usersCtrl.login);
 
 // Just to test the token
-router.get('/check-token', ensureLoggedIn, usersCtrl.checkToken);
+// router.get('/check-token', ensureLoggedIn, usersCtrl.checkToken);
 
 module.exports = router;
