@@ -3,10 +3,12 @@ require('./config/database');
 
 const Widget = require('./models/widget');
 const Category = require('./models/category');
+const order = require('./models/order');
 // const category = require('./models/category');
 
 (async function() {
 
+    await 
     await Category.deleteMany({});
     const categories = await Category.create([
         {
