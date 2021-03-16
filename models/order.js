@@ -1,10 +1,10 @@
-const mongoose = required('mongoose');
+const mongoose = require('mongoose');
 const Schema = mongoose.Schema;
-const widgetSchema = required('./widgetSchema.js');
+const widgetSchema = require('./widgetSchema');
 
 const lineWidgetSchema = new Schema({
-    widget: widgetSchema,
     quantity: {type: Number, default: 1},
+    widget: widgetSchema
 },{
     timestamps:true,
     toJSON: {virtuals: true}
@@ -15,7 +15,7 @@ lineWidgetSchema.virtual('extPrice').get(function() {
 });
 
 const orderSchema = new Schema({
-    user: {type: Schema.type.ObjectId, ref:'User'},
+    user: {type: Schema.Types.ObjectId, ref:'User'},
     lineWidgets: [lineWidgetSchema],
     isPaid: {type: Boolean, default:false},
 }, {
@@ -43,9 +43,18 @@ orderSchema.statics.getUserOrders = async function(userId)  {
     return this.find({ user: userId, isPaid: true}).sort('-updatedAt');
 };
 
-orderSchema.methods.addWidgetToCard = async function(widgetId) {
+
+orderSchema.statics.getCart = async function(userId) {
+    return this.findOneAndUpdate(
+        { user: userId, isPaid: false },
+        { user: userId },
+        { upsert: true, new: true },
+    );
+}
+
+orderSchema.methods.addWidgetToCart = async function(widgetId) {
     const cart = this;
-    const lineWidget = cart.lineWidgets.find(lineWidget => lineWidget.widget._id.equal(widgetId));
+    const lineWidget = cart.lineWidgets.find(lineWidget => lineWidget.widget._id.equals(widgetId));
     if(lineWidget) {
         lineWidget.quantity += 1;
     } else {
@@ -58,11 +67,12 @@ orderSchema.methods.addWidgetToCard = async function(widgetId) {
 orderSchema.methods.setWidgetQuantity = async function(widgetId, newQuantity) {
     const cart = this;
     const lineWidget = cart.lineWidgets.find(lineWidget => lineWidget.widget._id.equals(widgetId));
-    if (lineWidget && newQuantity <= 0) {
+    if(lineWidget && newQuantity <= 0) {
         lineWidget.remove();
     } else if (lineWidget) {
         lineWidget.quantity = newQuantity;
     }
+    return cart.save();
 }
 
 module.exports = mongoose.model('Order', orderSchema);
