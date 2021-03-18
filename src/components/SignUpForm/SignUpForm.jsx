@@ -75,6 +75,8 @@ export default class SignUpForm extends Component {
           <Button type="submit" size="large" id="login" disabled={disable}>
             SIGN UP
           </Button>
+        </Box>
+        <Box display="flex" justifyContent="center">
           <p className="error-message">&nbsp;{this.state.error}</p>
         </Box>
       </form>
