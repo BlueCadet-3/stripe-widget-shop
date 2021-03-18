@@ -1,0 +1,12 @@
+Input#email, Input#password {
+  font-size: 22px;
+  padding-top: 3em;
+}
+
+Input#email::placeholder, Input#password::placeholder {
+  opacity: 0.2;
+}
+
+Button#login {
+  margin: 4em auto;
+} 
