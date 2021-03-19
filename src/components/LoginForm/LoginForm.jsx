@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { Box, Button, Container, Input } from "@material-ui/core";
+import { Box, Button, Input } from "@material-ui/core";
 import * as usersService from "../../utilities/users-service";
 import "./LoginForm.css";
 
@@ -60,16 +60,4 @@ export default function LogIn({ setUser }) {
       </Box>
     </form>
   );
-}
-
-{
-  /* <div className="form-container" onSubmit={handleSubmit}>
-  <form autoComplete="off" >
-  <label>Email</label>
-    <input type="text" name="email" value={credentials.email} onChange={handleChange} required />
-    <label>Password</label>
-    <input type="password" name="password" value={credentials.password} onChange={handleChange} required />
-    <button type="submit">LOG IN</button>
-  </form>
-</div> */
 }
