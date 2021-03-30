@@ -16,7 +16,6 @@ const theme = createMuiTheme();
 export default function App() {
   const [user, setUser] = useState(getUser());
 
-
   console.log(theme)
 
   return (

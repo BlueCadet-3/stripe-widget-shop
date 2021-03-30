@@ -19,7 +19,7 @@ const order = require('./models/order');
         },
         {
             name: 'Green'
-        }
+        },
     ]);
 
 

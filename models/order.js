@@ -43,7 +43,6 @@ orderSchema.statics.getUserOrders = async function(userId)  {
     return this.find({ user: userId, isPaid: true}).sort('-updatedAt');
 };
 
-
 orderSchema.statics.getCart = async function(userId) {
     return this.findOneAndUpdate(
         { user: userId, isPaid: false },
@@ -74,5 +73,6 @@ orderSchema.methods.setWidgetQuantity = async function(widgetId, newQuantity) {
     }
     return cart.save();
 }
+
 
 module.exports = mongoose.model('Order', orderSchema);
