@@ -106,8 +106,12 @@ export default function MenuAppBar({user, setUser}) {
                 <MenuItem onClick={handleMenuClose}>
                     My Account
                 </MenuItem>
-                <MenuItem>
-                    Shopping Cart
+                <MenuItem
+                    edge="start"
+                    aria-label="shopping cart of current user"
+                    color="inherit"
+                >   
+                    <CartDrawer />
                 </MenuItem>
                 <MenuItem onClick={handleLogOut}>
                     Sign Out

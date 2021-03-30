@@ -31,9 +31,20 @@ const useStyles = makeStyles((theme) => ({
             width: `calc(100% - ${drawerWidth}px)`,
             marginRight:drawerWidth,
         }
-    }
+    },
+    showShoppingCartIcon: {
+        display:'none',
+        [theme.breakpoints.up('md')] : {
+            display:'flex',
+        }
+    },
+    showShoppingCartText: {
+        display:'flex',
+        [theme.breakpoints.up('md')] : {
+            display:'none',
+        }
+    },
 }));
-
 
 export default function CartDrawer() {
     const classes = useStyles();
@@ -51,7 +62,8 @@ export default function CartDrawer() {
 
     return (
             <React.Fragment>
-                <ShoppingCartIcon onClick={toggleDrawer(true)} onClose={toggleDrawer(false)}/>
+                <ShoppingCartIcon className={classes.showShoppingCartIcon} onClick={toggleDrawer(true)} onClose={toggleDrawer(false)}/>
+                <Typography className={classes.showShoppingCartText} onClick={toggleDrawer(true)} onClose={toggleDrawer(false)} > Shopping Cart </Typography>
                 <Drawer anchor='right' open={state} onClose={toggleDrawer(false)}>
                     <div className={classes.list} onClick={toggleDrawer(false)}>
                         <List>
