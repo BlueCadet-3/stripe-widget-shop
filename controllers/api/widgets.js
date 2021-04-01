@@ -5,7 +5,6 @@ module.exports = {
 };
 
 async function getAll(req, res) {
-    const widgets = await Widget.find({}).populate('category').exec();
-    console.log(widgets);
+    const widgets = await Widget.find({}).sort('price').populate('category').exec();
     res.json(widgets);
 }

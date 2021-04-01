@@ -31,7 +31,30 @@ const useStyles = makeStyles((theme) => ({
       width: `calc(100% - ${drawerWidth}px)`,
       marginRight: drawerWidth,
     },
-  },
+    drawer: {
+        [theme.breakpoints.up('sm')]: {
+            width: drawerWidth,
+            flexShrink: 0,
+        }
+    },
+    appBar: {
+        [theme.breakpoints.up('sm')]: {
+            width: `calc(100% - ${drawerWidth}px)`,
+            marginRight:drawerWidth,
+        }
+    },
+    showShoppingCartIcon: {
+        display:'none',
+        [theme.breakpoints.up('md')] : {
+            display:'flex',
+        }
+    },
+    showShoppingCartText: {
+        display:'flex',
+        [theme.breakpoints.up('md')] : {
+            display:'none',
+        }
+    },
 }));
 
 export default function CartDrawer() {
@@ -47,23 +70,22 @@ export default function CartDrawer() {
     }
     setCartDrawer(!cartDrawer);
   };
-
-  return (
-    <>
-      <ShoppingCartIcon
-        onClick={toggleDrawer(true)}
-        onClose={toggleDrawer(false)}
-      />
-      <Drawer anchor="right" open={cartDrawer} onClose={toggleDrawer(false)}>
-        <div className={classes.list} onClick={toggleDrawer(false)}>
-          <List>
-            <ListItem>
-              <Typography>Shopping Cart</Typography>
-            </ListItem>
-            <Divider />
-          </List>
-        </div>
-      </Drawer>
-    </>
-  );
-}
+    return (
+            <React.Fragment>
+                <ShoppingCartIcon className={classes.showShoppingCartIcon} onClick={toggleDrawer(true)} onClose={toggleDrawer(false)}/>
+                <Typography className={classes.showShoppingCartText} onClick={toggleDrawer(true)} onClose={toggleDrawer(false)} > Shopping Cart </Typography>
+                <Drawer anchor='right' open={state} onClose={toggleDrawer(false)}>
+                    <div className={classes.list} onClick={toggleDrawer(false)}>
+                        <List>
+                            <ListItem>
+                                <Typography varient="h1" className="center">
+                                    Shopping Cart
+                                </Typography>
+                            </ListItem>
+                                <Divider />
+                        </List>
+                    </div>
+                </Drawer>
+            </React.Fragment>
+        );
+};

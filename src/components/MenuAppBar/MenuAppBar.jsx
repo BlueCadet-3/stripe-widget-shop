@@ -90,22 +90,32 @@ export default function MenuAppBar({ user, setUser }) {
     </Menu>
   );
 
-  const mobileMenuId = "primary-search-account-menu-mobile";
-  const renderMobileMenu = (
-    <Menu
-      anchorEl={mobileMoreAnchorEl}
-      anchorOrigin={{ vertical: "top", horizontal: "right" }}
-      id={mobileMenuId}
-      keepMounted
-      transformOrigin={{ vertical: "top", horizontal: "right" }}
-      open={isMobileMenuOpen}
-      onClose={handleMobileMenuClose}
-    >
-      <MenuItem onClick={handleMenuClose}>My Account</MenuItem>
-      <MenuItem>Shopping Cart</MenuItem>
-      <MenuItem onClick={handleLogOut}>Sign Out</MenuItem>
-    </Menu>
-  );
+    const mobileMenuId='primary-search-account-menu-mobile';
+    const renderMobileMenu = (
+        <Menu
+            anchorEl={mobileMoreAnchorEl}
+            anchorOrigin={{ vertical: 'top', horizontal: 'right'}}
+            id={mobileMenuId}
+            keepMounted
+            transformOrigin={{vertical: 'top', horizontal: 'right'}}
+            open={isMobileMenuOpen}
+            onClose={handleMobileMenuClose}
+        >
+                <MenuItem onClick={handleMenuClose}>
+                    My Account
+                </MenuItem>
+                <MenuItem
+                    edge="start"
+                    aria-label="shopping cart of current user"
+                    color="inherit"
+                >   
+                    <CartDrawer />
+                </MenuItem>
+                <MenuItem onClick={handleLogOut}>
+                    Sign Out
+                </MenuItem>
+        </Menu>
+    )
 
   return (
     <div className={classes.root}>
